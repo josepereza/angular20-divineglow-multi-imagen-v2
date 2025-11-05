@@ -1,0 +1,23 @@
+<div class="container py-5">
+  <h2 class="text-center mb-5">Nuestra Colección</h2>
+  <div class="row">
+    @for (product of misproductos(); track $index) {
+         <div class="col-md-6 col-lg-4 mb-4" >
+      <div class="card product-card h-100" [routerLink]="['/product', product.id]">
+        <img [src]="'http://localhost:3000' + product.imagenes[0]?.imageUrl" class="card-img-top" [alt]="product.name" style="object-position: center;">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">{{ product.description }}</p>
+        </div>
+        <div class="card-footer">
+          <span class="price">{{ product.price | currency:'EUR' }}</span>
+          <button class="btn btn-dark">Ver Detalles</button>
+        </div>
+      </div>
+    </div>
+    }
+   
+  </div>
+</div>
+
+http://localhost:3000/uploads/1761591268866.jpeg

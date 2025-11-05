@@ -1,0 +1,64 @@
+<div class="carrito container my-5">
+  <h2 class="text-center mb-4">Ihr Warenkorb</h2>
+
+  <!-- Vista cuando el carrito NO está vacío -->
+   @if (cartService.totalItems() > 0) {
+
+<div >
+    <div class="row">
+      <!-- Columna de productos -->
+      <div class="col-lg-8">
+        <ul class="list-group shadow-sm">
+            @for (item of cartService.cartItems(); track $index) {
+
+ <li  class="list-group-item d-flex align-items-center">
+            <img [src]="'http://localhost:3000' + item.imagenes[0].imageUrl" [alt]="item.name" width="100px" class="cart-item-image me-3">
+            <div class="flex-grow-1">
+              <h5 class="item-name mb-1">{{ item.name }}</h5>
+              <p class="mb-1 text-muted">{{ item.price | currency:'CHF' }}</p>
+            </div>
+            <button class="btn btn-outline-danger btn-sm" (click)="cartService.removeFromCart(item.id)">
+              <i class="bi bi-trash"></i>
+            </button>
+          </li>
+            }
+         
+        </ul>
+      </div>
+
+      <!-- Columna de resumen -->
+      <div class="col-lg-4 mt-4 mt-lg-0">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Zusammenfassung</h5>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                Artikel ({{ cartService.totalItems() }})
+                <span>{{ cartService.totalPrice() | number:'1.2-2' | currency:'CHF' }}</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center fw-bold">
+                Gesamtsumme
+                <span>{{ cartService.totalPrice() | currency:'CHF' }}</span>
+              </li>
+            </ul>
+            <a routerLink="/checkout" class="btn btn-primary w-100 mt-3">Zur Kasse</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   }@else {
+    emptyCart
+   }
+  
+
+  <!-- Plantilla para cuando el carrito está vacío -->
+  <ng-template #emptyCart>
+    <div class="text-center empty-cart-container">
+      <i class="bi bi-cart-x display-1 text-muted"></i>
+      <h4 class="mt-3">Ihr Warenkorb ist leer.</h4>
+      <p class="text-muted">Sieht so aus, als hätten Sie noch nichts hinzugefügt.</p>
+      <a routerLink="/products" class="btn btn-primary mt-3">Kollektion ansehen</a>
+    </div>
+  </ng-template>
+</div>

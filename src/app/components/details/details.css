@@ -1,0 +1,67 @@
+.price {
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: #333;
+}
+
+.btn-primary {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+.existe {
+  padding: 20px;
+  background-color: #198754;
+  text-align: center;
+  font-size: large;
+}
+.noexiste {
+  padding:20Px;
+  background-color: red;
+    text-align: center;
+  font-size: large;
+}
+
+.btn-primary:disabled {
+    background-color: #198754; /* Color verde de éxito de Bootstrap */
+    border-color: #198754;
+}
+img{
+  width: 100%;
+}
+.detalles{
+  height: 100vh;
+}
+   @media (max-width: 768px) {
+      .description {
+        font-size: 0.8rem;
+      }
+      img{
+        width: 100%;
+        margin-right:auto;
+      }
+      .item-name{
+        font-size: 1.2em;
+        margin-top: 5px;
+      }
+      .price {
+        font-size: 1.2rem;
+      }
+    }
+
+    .carousel-item {
+  height: 500px; /* Ajusta esta altura a tu gusto */
+  background-color: #f8f9fa; /* Color de fondo mientras carga la imagen */
+}
+
+.product-image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover; /* Mágico: escala la imagen para cubrir el espacio sin deformarla */
+}
+
+.price {
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: #333;
+}

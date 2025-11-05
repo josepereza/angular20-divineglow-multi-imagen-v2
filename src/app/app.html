@@ -1,0 +1,15 @@
+<app-header></app-header>
+@for (toast of toastService.toasts$ | async; track $index) {
+<ngb-toast
+  [class]="toast.classname"
+  [autohide]="true"
+  [delay]="toast.delay ?? 4000"
+  (hidden)="toastService.remove(toast)"
+  style="position: fixed; top: 1rem; right: 1rem; z-index: 1200"
+>
+  {{ toast.text }}
+</ngb-toast>
+}
+
+<router-outlet></router-outlet>
+<app-footer></app-footer>

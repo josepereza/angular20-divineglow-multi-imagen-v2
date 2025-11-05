@@ -1,0 +1,23 @@
+.login-container {
+  height: 100vh;
+  background: transparent;
+}
+
+.login-card {
+  background: rgba(25, 25, 25, 0.85);
+  backdrop-filter: blur(8px);
+  border-radius: 15px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 380px;
+}
+
+.form-control:focus {
+  border-color: #0d6efd !important;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25) !important;
+}
+
+.btn-primary {
+  border-radius: 10px;
+  font-size: 1rem;
+}

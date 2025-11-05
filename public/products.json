@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "name": "Rosa Perlen Tasche L",
+    "description": "Ein lebhaftes und feminines Design, handgefertigt aus hunderten schillernden Perlen. Die goldene Kette verleiht einen Hauch von Eleganz, perfekt, um bei jedem besonderen Anlass aufzufallen. Inklusive eines einzigartigen Kirschen-Anhängers.",
+    "price": 89.00,
+    "imageUrl": "/rosa.jpeg"
+  },
+  {
+    "id": 2,
+    "name": "Weisse Perlen Tasche M",
+    "description": "Zeitlose Eleganz verkörpert in dieser Tasche aus weissen Perlen. Ihre solide Struktur und das klassische Design machen sie zum idealen Begleiter für formelle Anlässe oder um Ihrem Alltagslook eine anspruchsvolle Note zu verleihen.",
+    "price": 69.00,
+    "imageUrl": "/weiss.jpeg"
+  },
+ 
+  {
+    "id": 3,
+    "name": "Mini-Tasche 'AirPods Schutzülle rosa'",
+    "description": "Klein, aber oho! Dieser Mini-Beutel ist dein strahlender Begleiter für die schönsten Momente. Ideal für deine AirPods oder kleine Schätze, mit einem eleganten Perlen-Armband.",
+    "price": 39.00,
+    "imageUrl": "/AirPods.jpeg"
+  }
+]

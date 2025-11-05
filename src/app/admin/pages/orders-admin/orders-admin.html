@@ -1,0 +1,110 @@
+<div class="container mt-4">
+  <br /><br /><br />
+  <a class="btn btn-primary btn-sm mt-2" routerLink="/admin">🔙 zurückkommen</a>
+  <div class="filtros mb-3">
+  <button
+    class="btn me-2"
+    [class.btn-primary]="filtro() === 'alle'"
+    [class.btn-outline-primary]="filtro() !== 'alle'"
+    (click)="setFiltro('alle')">
+    Alle
+  </button>
+
+  <button
+    class="btn me-2"
+    [class.btn-warning]="filtro() === 'offen'"
+    [class.btn-outline-warning]="filtro() !== 'offen'"
+    (click)="setFiltro('offen')">
+    Offen
+  </button>
+
+  <button
+    class="btn"
+    [class.btn-success]="filtro() === 'gesendet'"
+    [class.btn-outline-success]="filtro() !== 'gesendet'"
+    (click)="setFiltro('gesendet')">
+    Gesendet
+  </button>
+</div>
+
+<!-- 🧠 Ahora usamos ordersFiltrados() -->
+<!-- @for(order of ordersFiltrados(); track order.id) {
+  <div class="order-card mb-3 p-3 border rounded">
+    <strong>#{{ order.id }}</strong> — {{ order.customerName }}
+    <span class="badge ms-2" [class.bg-success]="order.gesendet" [class.bg-warning]="!order.gesendet">
+      {{ order.gesendet ? 'Gesendet ✅' : 'Offen ⏳' }}
+    </span>
+  </div>
+} -->
+
+  <br />
+  <br />
+
+  <h2 class="text-white">📦 Administración de Pedidos</h2>
+
+  @for(order of ordersFiltrados(); track order.id) {
+   
+  <div class="card mb-2 p-3">
+    <p>🧑 Cliente: {{ order.customerName }}</p>
+    <p>📅 Fecha: {{ order.createdAt }}</p>
+    <p>💶 Total: {{ order.totalAmount }} €</p>
+
+    @if(order.gesendet) {
+    <span class="badge bg-success">✅ gesendet</span>
+    } @else {
+    <span class="badge bg-warning text-dark">⏳ Offen • Noch nicht gesendet</span>
+    }
+
+    <button class="btn btn-primary btn-sm mt-2 p-2" (click)="toggleGesendet(order)">
+      ✅ Als gesendet markieren
+    </button>
+    <!-- ✅ Nuevo botón -->
+    <button class="btn btn-info btn-sm p-2 mt-1" (click)="viewLines(order)">
+      📄 Positionen anzeigen
+    </button>
+  </div>
+  
+}
+</div>
+
+@if(showLinesModal()) {
+<div class="modal-backdrop fade show"></div>
+<div class="modal d-block fade show">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">📝 Bestelldetails #{{ selectedOrder()?.id }}</h5>
+        <button type="button" class="btn-close" (click)="showLinesModal.set(false)"></button>
+      </div>
+
+      <div class="modal-body">
+        @if(selectedOrder()?.lineas?.length) {
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Producto ID</th>
+              <th>Name</th>
+              <th>Menge</th>
+              <th>Price</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            @for(line of selectedOrder()?.lineas; track line.id) {
+            <tr>
+              <td>{{ line.productoId }}</td>
+              <td>{{ line.producto?.name }}</td>
+              <td>{{ line.cantidad }}</td>
+              <td>{{ line.producto?.price }}</td>
+            </tr>
+            }
+          </tbody>
+        </table>
+        } @else {
+        <p>No hay líneas en este pedido.</p>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+}

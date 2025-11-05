@@ -1,0 +1,57 @@
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white text-center">
+          <h4>Pago Seguro</h4>
+        </div>
+        <div class="card-body p-4">
+          <form id="payment-form" (ngSubmit)="handleSubmit()">
+            
+            <!-- ***** CAMBIO AQUÍ: AÑADIMOS EL CAMPO PARA EL NOMBRE ***** -->
+            <div class="mb-3">
+              <label for="cardholder-name" class="form-label">
+                Nombre en la Tarjeta
+              </label>
+              <!-- Usamos ngModel para vincular este campo a una variable en nuestro componente -->
+              <input 
+                type="text" 
+                id="cardholder-name" 
+                class="form-control"
+                [(ngModel)]="cardholderName" 
+                name="cardholderName"
+                required
+                placeholder="Max Mustermann">
+            </div>
+
+            <!-- El elemento de la tarjeta de Stripe no cambia -->
+            <div class="mb-3">
+              <label for="card-element" class="form-label">
+                Datos de la Tarjeta de Crédito
+              </label>
+              <div id="card-element" #cardElement></div>
+            </div>
+
+            @if(cardError()) {
+              <div class="alert alert-danger" role="alert">
+                <i class="bi bi-exclamation-triangle-fill"></i> {{ cardError() }}
+              </div>
+            }
+
+            <div class="d-grid mt-4">
+              <!-- Añadimos una comprobación para deshabilitar el botón si el nombre está vacío -->
+              <button class="btn btn-primary btn-lg" type="submit" [disabled]="isLoading() || !cardholderName">
+                @if(isLoading()) {
+                  <!-- ... spinner ... -->
+                } @else {
+                  <span>Pagar {{ cartService.totalPrice() | currency:'CHF' }}</span>
+                }
+              </button>
+            </div>
+            
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

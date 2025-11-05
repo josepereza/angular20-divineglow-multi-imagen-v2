@@ -1,0 +1,6 @@
+.botones {
+  display: flex;
+  margin-top: 100px;
+  justify-content: space-between;
+  width: 100%;
+}

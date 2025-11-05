@@ -1,0 +1,55 @@
+<div class="container my-5">
+  @if (product(); as productItem) {
+  <div class="row">
+    <!-- Columna del Carrusel de Imágenes -->
+    <div class="col-md-6">
+      @if (productItem.imagenes) { 
+      <ngb-carousel>
+        @for (item of productItem.imagenes; track $index) {
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img [src]="'http://localhost:3000' + item.imageUrl" alt="Random first slide" />
+          </div>
+          <div class="carousel-caption">
+            <h3>{{productItem.name}}</h3>
+            <p>{{productItem.description | slice:0:50}}...</p>
+          </div>
+        </ng-template>
+        }
+      </ngb-carousel>
+      }
+    </div>
+    <div class="col-md-6 d-flex text-white flex-column justify-content-center">
+      <h1 class="item-name">{{ productItem.name }}</h1>
+      <p class="lead description">{{ productItem.description }}</p>
+      <p class="price text-white">{{ productItem.price | currency : 'CHF' }}</p>
+      @if (productItem.stock>0) {
+      <p class="existe">vorhanden</p>
+
+      }@else {
+      <p class="noexiste">im Moment gibt es keine.</p>
+      }
+      <div class="mt-4">
+        <button
+          class="btn btn-primary btn-lg"
+          [ngClass]="productItem.stock < 1 ? 'disabled' : ''"
+          (click)="addItemToCart()"
+          [disabled]="addedToCart()"
+        >
+          <!-- También actualizamos el botón a la nueva sintaxis -->
+          @if (!addedToCart()) {
+          <span> <i class="bi bi-cart-plus"></i> In den Warenkorb </span>
+          } @else {
+          <span> Hinzugefügt! <i class="bi bi-check-lg"></i> </span>
+          }
+        </button>
+      </div>
+    </div>
+  </div>
+  } @else {
+  <!-- El bloque @else se muestra cuando la condición @if es falsa -->
+  <p class="text-center">
+    Produkt nicht gefunden. <a routerLink="/products">Zurück zur Kollektion</a>.
+  </p>
+  }
+</div>

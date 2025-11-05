@@ -1,0 +1,42 @@
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+
+/* You can add global styles to this file, and also import other style files */
+
+body {
+ 
+  font-family: 'Poppins', sans-serif;
+    background-color: rgba(0, 0, 0, 0.842);
+}
+
+main {
+  min-height: calc(100vh - 70px);
+}
+
+
+body {
+  background-color: #121212 !important;
+}
+
+.card {
+  transition: transform .2s, box-shadow .2s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 4px 15px rgba(0,255,255,.4);
+}
+
+.btn-info {
+  background-color: #0dcaf0;
+  border: none;
+}
+
+input.form-control,
+textarea.form-control {
+  border: 1px solid #444;
+}
+
+html, body, app-root { height: 100%; margin: 0; }
+app-root { display:flex; flex-direction:column; min-height:100vh; }
+main.app-main { flex:1 1 auto; }

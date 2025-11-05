@@ -1,0 +1,116 @@
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+
+      <h2 class="text-center mb-4">Lieferadresse & Kontakt</h2>
+
+      <!-- El formulario solo se muestra si el estado no es 'success' -->
+      @if (submissionStatus() !== 'success') {
+        <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" novalidate>
+          <div class="card shadow-sm">
+            <div class="card-body p-4">
+
+              <!-- Campo: Nombre Completo -->
+              <div class="mb-3">
+                <label for="fullName" class="form-label">Vollständiger Name</label>
+                <input type="text" id="fullName" formControlName="fullName" class="form-control"
+                       [ngClass]="{ 'is-invalid': f['fullName'].invalid && f['fullName'].touched }">
+                @if (f['fullName'].invalid && f['fullName'].touched) {
+                  <div class="invalid-feedback">
+                    @if (f['fullName'].errors?.['required']) {
+                      Dieses Feld ist erforderlich.
+                    }
+                    @if (f['fullName'].errors?.['minlength']) {
+                      Der Name muss mindestens 3 Zeichen lang sein.
+                    }
+                  </div>
+                }
+              </div>
+
+              <!-- Campo: Email -->
+              <div class="mb-3">
+                <label for="email" class="form-label">E-Mail-Adresse</label>
+                <input type="email" id="email" formControlName="email" class="form-control"
+                       [ngClass]="{ 'is-invalid': f['email'].invalid && f['email'].touched }">
+                @if (f['email'].invalid && f['email'].touched) {
+                  <div class="invalid-feedback">
+                    @if (f['email'].errors?.['required']) {
+                      Dieses Feld ist erforderlich.
+                    }
+                    @if (f['email'].errors?.['email']) {
+                      Bitte geben Sie eine gültige E-Mail-Adresse ein.
+                    }
+                  </div>
+                }
+              </div>
+
+              <!-- Campo: Dirección -->
+              <div class="mb-3">
+                <label for="street" class="form-label">Strasse und Hausnummer</label>
+                <input type="text" id="street" formControlName="street" class="form-control"
+                       [ngClass]="{ 'is-invalid': f['street'].invalid && f['street'].touched }">
+                @if (f['street'].invalid && f['street'].touched) {
+                  <div class="invalid-feedback">Dieses Feld ist erforderlich.</div>
+                }
+              </div>
+
+              <!-- Fila para Ciudad y Código Postal -->
+              <div class="row">
+                <div class="col-md-8 mb-3">
+                  <label for="city" class="form-label">Stadt</label>
+                  <input type="text" id="city" formControlName="city" class="form-control"
+                         [ngClass]="{ 'is-invalid': f['city'].invalid && f['city'].touched }">
+                  @if (f['city'].invalid && f['city'].touched) {
+                    <div class="invalid-feedback">Dieses Feld ist erforderlich.</div>
+                  }
+                </div>
+                <div class="col-md-4 mb-3">
+                  <label for="postalCode" class="form-label">PLZ</label>
+                  <input type="text" id="postalCode" formControlName="postalCode" class="form-control"
+                         [ngClass]="{ 'is-invalid': f['postalCode'].invalid && f['postalCode'].touched }">
+                  @if (f['postalCode'].invalid && f['postalCode'].touched) {
+                    <div class="invalid-feedback">
+                      @if (f['postalCode'].errors?.['required']) {
+                        Erforderlich.
+                      }
+                      @if (f['postalCode'].errors?.['pattern']) {
+                        Ungültig (4 Ziffern).
+                      }
+                    </div>
+                  }
+                </div>
+              </div>
+
+              <!-- Botón de Envío -->
+              <button type="submit" class="btn btn-primary w-100" [disabled]="isSubmitting()">
+                @if (isSubmitting()) {
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span class="ms-2">Wird bearbeitet...</span>
+                } @else {
+                  <span>Bestellung abschicken</span>
+                }
+              </button>
+
+            </div>
+          </div>
+        </form>
+      } @else {
+        <!-- Mensaje de Éxito -->
+        <div class="alert alert-success text-center">
+          <h4 class="alert-heading">Vielen Dank!</h4>
+          <p>Ihre Bestellung wurde erfolgreich aufgegeben. Sie werden in Kürze zur Startseite weitergeleitet.</p>
+          <i class="bi bi-check-circle-fill display-3"></i>
+        </div>
+      }
+
+    </div>
+  </div>
+</div>```
+
+<!-- ### **Resumen de la Implementación:**
+
+1.  **Formulario Reactivo:** Hemos creado un `FormGroup` con todos los campos necesarios y sus validadores específicos (requerido, email, longitud mínima, patrón).
+2.  **Validación en Tiempo Real:** Las clases `is-invalid` de Bootstrap se aplican dinámicamente para dar feedback visual inmediato al usuario.
+3.  **Nuevo Control de Flujo `@if`:** Los mensajes de error solo aparecen cuando un campo es inválido y el usuario ha interactuado con él (`touched`). La sintaxis es mucho más limpia que con `*ngIf`.
+4.  **Gestión de Estado con Signals:** Los signals `isSubmitting` y `submissionStatus` controlan la interfaz de manera declarativa: desactivan el botón, muestran un spinner, y al final, ocultan el formulario para mostrar un mensaje de éxito.
+5.  **Experiencia de Usuario (UX):** El proceso es claro, el feedback es instantáneo y el resultado (éxito) es confirmado de forma visible, vaciando el carrito y reseteando el formulario para prevenir envíos duplicados. -->
